@@ -14,12 +14,12 @@ routes.put("/user/:user_id",UserValidator, UserController.update);
 routes.delete("/user/:user_id", UserValidator,UserController.delete);
 
 // Category
-routes.post("/category", CategoryValidator.create, CategoryController.create);
 routes.get(
   "/category/:category_id",
   CategoryValidator.getById,
   CategoryController.getById
 );
+routes.post("/category", CategoryValidator.create, CategoryController.create);
 routes.put(
   "/category/:category_id",
   CategoryValidator.update,
