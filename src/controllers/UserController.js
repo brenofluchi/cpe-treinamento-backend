@@ -1,33 +1,66 @@
-const user = require("../models/UserModel");
-
+const UserModel = require("../models/UserModel");
+const Firebase = require("../utils/Firebase");
 
 module.exports = {
 
     async create(request, response) {
         try {
             const user = request.body;
+            
+            const uid = await Firebase.createNewUser(user.email, user.password);
 
-            const result = await user.create(user);
+            delete user.password;
+            user.firebase_id = uid;
 
-            return response.status(200).json(result);
+            const result = await UserModel.create(user);
+            return response.status(200).json({ user_id:result });
         
-        } catch (error) {
-            console.warn("note creation failed:", console.error);
-            return response.status(500).json({notification: "Internal server Error while trying to create category",})
+        } catch (err) {
+            console.log("User creation failed:" + err);
+            return response.status(500).json({         notification: "Internal server error while trying to create User",})
         }
-
     },
 
     async getById(request, response) {
-
+        try {
+            const { user_id } = request.params;
+            const result = await User.getById(user_id);
+      
+            return response.status(200).json(result);
+          } catch (err) {
+            console.log("User getById failed: " + err);
+            return response.status(500).json({
+              notification: "Internal server error while trying to get User",
+            });
+          }
     },
 
     async update(request, response) {
-
+        try {
+            const { user_id } = request.params;
+            const user = request.body;
+            const result = await UserModel.updateById(user_id, user);
+      
+            return response.status(200).json(result);
+          } catch (err) {
+            console.log("User update failed: " + err);
+            return response.status(500).json({
+              notification: "Internal server error while trying to update User",
+            });
+          }
     },
 
     async delete(request, response) {
-
+        try {
+            const { user_id } = request.params;
+      
+            const result = await UserModel.deleteById(user_id);
+            return response.status(200).json(result);
+        } catch (err) {
+            console.log("User delete failed: " + err);
+            return response.status(500).json({
+              notification: "Internal server error while trying to delete User",
+            });
+        }
     },
-
 }
