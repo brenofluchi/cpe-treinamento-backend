@@ -8,10 +8,10 @@ const CategoryController = require("./controllers/CategoryController");
 const CategoryValidator = require("./validators/CategoryValidator");
 
 //User
-routes.get("/user/:user_id", UserController.getById);
-routes.post("/user", UserController.create);
-routes.put("/user/:user_id", UserController.update);
-routes.delete("/user/:user_id",UserController.delete);
+routes.get("/user/:user_id",UserValidator.getById, UserController.getById);
+routes.post("/user",UserValidator.create, UserController.create);
+routes.put("/user/:user_id",UserValidator.update, UserController.update);
+routes.delete("/user/:user_id",UserValidator.delete,UserController.delete);
 
 // Category
 routes.get(
