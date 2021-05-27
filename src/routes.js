@@ -24,7 +24,7 @@ routes.delete("/user/:user_id",UserValidator.delete,UserController.delete);
 routes.get(
   "/category/:category_id",
   CategoryValidator.getById,
-  CategoryController.getById
+  CategoryController.getByUser
 );
 routes.post("/category", CategoryValidator.create, CategoryController.create);
 routes.put(
