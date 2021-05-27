@@ -10,7 +10,8 @@ module.exports = {
       cidade: Joi.string().required(),
       cep: Joi.string().required(),
       logradouro: Joi.string().required(),
-      sonho: Joi.string().required(),      
+      sonho: Joi.string().required(),
+      password: Joi.string().min(6).required(),      
     }),
   }),
 

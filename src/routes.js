@@ -1,11 +1,18 @@
 const express = require ("express"); 
 const routes = express.Router(); 
 
+const auth = require("./middlewares/authentication");
+
 const UserController = require("./controllers/UserController");
 const UserValidator = require("./validators/UserValidator");
 
 const CategoryController = require("./controllers/CategoryController");
 const CategoryValidator = require("./validators/CategoryValidator");
+
+const SessionController = require('./controllers/SessionController');
+
+//Session
+routes.post("/login", SessionController.signIn);
 
 //User
 routes.get("/user/:user_id",UserValidator.getById, UserController.getById);
