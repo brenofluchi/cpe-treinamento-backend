@@ -10,6 +10,7 @@ exports.up = function(knex) {
         table.string('cep').notNullable();
         table.string('logradouro').notNullable();
         table.string('sonho').notNullable();
+        table.string("firebase_id").notNullable();
     });
   };
   
