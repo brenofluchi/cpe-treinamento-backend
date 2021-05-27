@@ -2,12 +2,12 @@ const firebase = require('firebase/app');
 require('firebase/auth');
 
 const firebaseConfig = {
-    apiKey: process.env.apiKey ,
-    authDomain: process.env.authDomain ,
-    projectId: process.env.projectId ,
-    storageBucket: process.env.storageBucket ,
-    messagingSenderId: process.env.messagingSenderId ,
-    measurementId: process.env.measurementId,
+    apiKey: process.env.FIREBASE_APIKEY,
+    authDomain: process.env.FIREBASE_AUTHDOMAIN,
+    projectId: process.env.FIREBASE_PROJECTID,
+    storageBucket: process.env.FIREBASE_STORAGEBUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
+    measurementId: process.env.FIREBASE_MEASUREMENTID,
 };
 
 firebase.initializeApp(firebaseConfig);
