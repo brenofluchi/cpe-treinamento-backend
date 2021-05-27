@@ -14,24 +14,19 @@ module.exports = {
         });
       }
     },
-    async getByUser(request, response) {
-      try {
-        const { user_id } = request.params;
-  
-        const result = await CategoryModel.getByUserWithFilters(
-          user_id,
-          request.query
-        );
-  
-        return response.status(200).json(result);
-      } catch (error) {
-        console.warn("Note get failed:", error);
-  
-        return response.status(500).json({
-          notification: "Internal server error while trying to get Category",
-        });
-      }
-    },
+    async getById(request, response) {
+        try {
+          const { category_id } = request.params;
+          const result = await Category.getById(category_id);
+    
+          return response.status(200).json(result);
+        } catch (err) {
+          console.log("Category getById failed: " + err);
+          return response.status(500).json({
+            notification: "Internal server error while trying to get Category",
+          });
+        }
+      },
       async update(request, response) {
         try {
           const { category_id } = request.params;
