@@ -17,9 +17,9 @@ routes.post("/login", SessionController.signIn);
 //User
 routes.get("/user/:user_id",UserValidator.getById, UserController.getById);
 routes.post("/user",UserValidator.create, UserController.create);
-routes.put("/user/:user_id",UserValidator.update, UserController.update);
+routes.put("/user", UserValidator.update, auth.authenticateToken, UserController.update);
 routes.delete("/user/:user_id",UserValidator.delete,UserController.delete);
-
+routes.get("/profile", auth.authenticateToken, UserController.profile)
 // Category
 routes.get(
   "/category/:category_id",
