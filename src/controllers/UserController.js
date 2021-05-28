@@ -24,8 +24,7 @@ module.exports = {
     async getById(request, response) {
         try {
             const { user_id } = request.params;
-            const result = await User.getById(user_id);
-      
+            const result = await UserModel.getByFields({user_id});
             return response.status(200).json(result);
           } catch (err) {
             console.log("User getById failed: " + err);
@@ -37,7 +36,7 @@ module.exports = {
 
     async update(request, response) {
         try {
-            const { user_id } = request.params;
+            const { user_id } = request.session.user;
             const user = request.body;
             const result = await UserModel.updateById(user_id, user);
       
@@ -63,4 +62,18 @@ module.exports = {
             });
         }
     },
+    async profile(request, response) {
+      try {
+          const { user_id } = request.session.user;
+          console.log(request.session);
+          const result = await UserModel.getByFields({user_id});
+          console.log(result);
+          return response.status(200).json(result);
+        } catch (err) {
+          console.log("User getById failed: " + err);
+          return response.status(500).json({
+            notification: "Internal server error while trying to get User",
+          });
+        }
+  },
 }
